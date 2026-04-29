@@ -85,87 +85,154 @@ export default function DashBoard() {
 
   return (
     <main className="min-h-screen bg-[#F7F5F0]">
-      <div className="max-w-lg mx-auto">
-        <header className="bg-white border-b border-[#ece9e3] px-4 py-4 flex items-center justify-between">
-          <div>
-            <p className="text-xs text-gray-400">Good morning</p>
-            <h1 className="text-lg font-medium text-gray-900">My habits</h1>
+      <div className="flex flex-col lg:flex-row min-h-screen">
+        {/* Sidebar — desktop only */}
+        <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-[#ece9e3] p-6 fixed h-full">
+          <div className="mb-6">
+            <h1 className="text-base font-medium text-gray-900">
+              Habit Tracker
+            </h1>
+            <p className="text-xs text-gray-400 mt-0.5">{session?.email}</p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#EEEDFE] border border-[#AFA9EC] flex items-center justify-center text-xs font-medium text-[#534AB7]">
-              {session?.email?.[0]?.toUpperCase()}
+          {/* Sidebar stats */}
+          <div className="flex flex-col gap-3 mb-6">
+            <div className="bg-[#EEEDFE] border border-[#AFA9EC] rounded-xl p-3">
+              <div className="text-2xl font-medium text-[#3C3489]">
+                {habits.length}
+              </div>
+              <div className="text-xs text-[#534AB7] mt-0.5">habits total</div>
             </div>
+            <div className="bg-[#E1F5EE] border border-[#5DCAA5] rounded-xl p-3">
+              <div className="text-2xl font-medium text-[#085041]">
+                {habits.length > 0
+                  ? Math.max(...habits.map((h) => h.completions.length))
+                  : 0}
+              </div>
+              <div className="text-xs text-[#0F6E56] mt-0.5">best streak</div>
+            </div>
+          </div>
 
+          <div className="mt-auto">
             <button
               data-testid="auth-logout-button"
               onClick={handleLogout}
-              className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-full px-3 py-1.5 hover:bg-gray-100 transition-colors"
+              className="text-xs text-gray-400 hover:text-gray-700 transition-colors"
             >
               Log out
             </button>
           </div>
-        </header>
+        </aside>
 
-        <div className="grid grid-cols-2 gap-3 p-4">
-          <div className="bg-[#EEEDFE] border border-[#AFA9EC] rounded-xl p-3">
-            <div className="text-2xl font-medium text-[#3C3489]">
-              {habits.length}
+        {/* Main content */}
+        <div className="flex-1 lg:ml-64">
+          {/* Mobile + Tablet header */}
+          <header className="lg:hidden bg-white border-b border-[#ece9e3] px-4 py-4 flex items-center justify-between sticky top-0 z-10">
+            <div>
+              <p className="text-xs text-gray-400">Good morning</p>
+              <h1 className="text-lg font-medium text-gray-900">My habits</h1>
             </div>
-            <div className="text-xs text-[#534AB7] mt-0.5">habits total</div>
-          </div>
-          <div className="bg-[#E1F5EE] border border-[#5DCAA5] rounded-xl p-3">
-            <div className="text-2xl font-medium text-[#085041]">
-              {habits.length > 0
-                ? Math.max(
-                    ...habits.map((h) => {
-                      const today = new Date().toISOString().split("T")[0];
-                      return h.completions.filter((d) => d <= today).length;
-                    }),
-                  )
-                : 0}
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#EEEDFE] border border-[#AFA9EC] flex items-center justify-center text-xs font-medium text-[#534AB7]">
+                {session?.email?.[0]?.toUpperCase()}
+              </div>
+              <button
+                data-testid="auth-logout-button"
+                onClick={handleLogout}
+                className="text-xs text-gray-400 bg-gray-50 border border-gray-200 rounded-full px-3 py-1.5 hover:bg-gray-100 transition-colors"
+              >
+                Log out
+              </button>
             </div>
-            <p className="text-xs text-[#0F6E56] mt-0.5">best streak</p>
-          </div>
-        </div>
+          </header>
 
-        <div className="flex items-center justify-between px-4 pb-3">
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
-            Today
-          </p>
-          <button
-            data-testid="create-habit-button"
-            onClick={() => {
-              setEditingHabit(null);
-              setShowForm(true);
-            }}
-            className="flex items-center gap-1.5 bg-gray-900 text-white text-xs font-medium px-3 py-1.5 rounded-full hover:bg-gray-700 transition-colors"
-          >
-            <span className="text-sm leading-none">+</span> New habit
-          </button>
-        </div>
-
-        {showForm && (
-          <div className="mx-4 mb-4">
-            <HabitForm
-              habit={editingHabit}
-              userId={session?.userId ?? ""}
-              onSave={handleSaveHabit}
-              onCancel={() => {
-                setShowForm(false);
+          {/* Desktop header */}
+          <header className="hidden lg:flex items-center justify-between px-8 py-5">
+            <div>
+              <p className="text-xs text-gray-400">TODAY</p>
+              <h1 className="text-xl font-medium text-gray-900">{habits.length} habits</h1>
+            </div>
+            <button
+              data-testid="create-habit-button"
+              onClick={() => {
                 setEditingHabit(null);
+                setShowForm(true);
               }}
-            />
-          </div>
-        )}
+              className="flex items-center gap-1.5 bg-gray-900 text-white text-xs font-medium px-4 py-2 rounded-full hover:bg-gray-700 transition-colors"
+            >
+              <span className="text-sm leading-none">+</span> New habit
+            </button>
+          </header>
 
-        <div className="px-4 pb-8" data-testid="dashboard-page">
-          <HabitList
-            habits={habits}
-            onToggle={handleToggle}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+          <div className="p-4 md:p-6 lg:p-8">
+            {/* Mobile + Tablet stats */}
+            <div className="lg:hidden grid grid-cols-2 gap-3 mb-5">
+              <div className="bg-[#EEEDFE] border border-[#AFA9EC] rounded-xl p-3">
+                <div className="text-2xl font-medium text-[#3C3489]">
+                  {habits.length}
+                </div>
+                <div className="text-xs text-[#534AB7] mt-0.5">
+                  habits total
+                </div>
+              </div>
+              <div className="bg-[#E1F5EE] border border-[#5DCAA5] rounded-xl p-3">
+                <div className="text-2xl font-medium text-[#085041]">
+                  {habits.length > 0
+                    ? Math.max(...habits.map((h) => h.completions.length))
+                    : 0}
+                </div>
+                <div className="text-xs text-[#0F6E56] mt-0.5">best streak</div>
+              </div>
+            </div>
+
+            {/* Mobile + Tablet section header */}
+            <div className="lg:hidden flex items-center justify-between mb-4">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+                Today
+              </p>
+              <button
+                data-testid="create-habit-button"
+                onClick={() => {
+                  setEditingHabit(null);
+                  setShowForm(true);
+                }}
+                className="flex items-center gap-1.5 bg-gray-900 text-white text-xs font-medium px-3 py-1.5 rounded-full hover:bg-gray-700 transition-colors"
+              >
+                <span className="text-sm leading-none">+</span> New habit
+              </button>
+            </div>
+
+            {/* Tablet + Desktop layout */}
+            <div className="md:grid md:grid-cols-2 md:gap-6 lg:block">
+              {/* Form */}
+              {showForm && (
+                <div className="mb-4 md:mb-0">
+                  <HabitForm
+                    habit={editingHabit}
+                    userId={session?.userId ?? ""}
+                    onSave={handleSaveHabit}
+                    onCancel={() => {
+                      setShowForm(false);
+                      setEditingHabit(null);
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Habit list */}
+              <div
+                data-testid="dashboard-page"
+                className="lg:grid lg:grid-cols-2 lg:gap-4"
+              >
+                <HabitList
+                  habits={habits}
+                  onToggle={handleToggle}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

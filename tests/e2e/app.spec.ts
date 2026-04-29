@@ -112,9 +112,10 @@ test.describe('Habit Tracker app', () => {
     await page.getByTestId('auth-signup-submit').click()
 
     await expect(page).toHaveURL('/dashboard', { timeout: 5000 })
+    await expect(page.getByTestId('dashboard-page')).toBeVisible()
 
     // open the form
-    await page.getByTestId('create-habit-button').click()
+    await page.locator('[data-testid="create-habit-button"]:visible').click()
     await expect(page.getByTestId('habit-form')).toBeVisible()
 
     // fill in the form
@@ -133,8 +134,9 @@ test.describe('Habit Tracker app', () => {
     await page.getByTestId('auth-signup-submit').click()
 
     await expect(page).toHaveURL('/dashboard', { timeout: 5000 })
+    await expect(page.getByTestId('dashboard-page')).toBeVisible()
 
-    await page.getByTestId('create-habit-button').click()
+    await page.locator('[data-testid="create-habit-button"]:visible').click()
     await page.getByTestId('habit-name-input').fill('Drink Water')
     await page.getByTestId('habit-save-button').click()
 
@@ -158,8 +160,9 @@ test.describe('Habit Tracker app', () => {
     await page.getByTestId('auth-signup-submit').click()
 
     await expect(page).toHaveURL('/dashboard', { timeout: 5000 })
+    await expect(page.getByTestId('dashboard-page')).toBeVisible()
 
-    await page.getByTestId('create-habit-button').click()
+    await page.locator('[data-testid="create-habit-button"]:visible').click()
     await page.getByTestId('habit-name-input').fill('Read Books')
     await page.getByTestId('habit-save-button').click()
 
@@ -183,9 +186,11 @@ test.describe('Habit Tracker app', () => {
     await page.getByTestId('auth-signup-submit').click()
 
     await expect(page).toHaveURL('/dashboard', { timeout: 5000 })
+    await expect(page.getByTestId('dashboard-page')).toBeVisible()
 
-    // click logout
-    await page.getByTestId('auth-logout-button').click()
+    // scroll to top so the sticky header is fully visible, then click the visible logout button
+    await page.evaluate(() => window.scrollTo(0, 0))
+    await page.locator('[data-testid="auth-logout-button"]:visible').click()
 
     // should redirect to login
     await expect(page).toHaveURL('/login', { timeout: 5000 })

@@ -13,14 +13,14 @@ export default function HabitList({ habits, onToggle, onEdit, onDelete }: HabitL
     return (
       <div
         data-testid="empty-state"
-        className="flex flex-col items-center justify-center py-16 gap-3 text-center"
+        className="col-span-2 flex flex-col items-center justify-center py-16 gap-3 text-center"
       >
-        <div className="w-12 h-12 rounded-full border-2 border-dashed flex items-center justify-center">
-          <span className="text-xl text-black leading-none">+</span>
+        <div className="w-12 h-12 rounded-full border-2 border-dashed border-gray-700 flex items-center justify-center">
+          <span className="text-xl text-gray-700 leading-none">+</span>
         </div>
         <div>
           <p className="text-sm font-medium text-gray-600">No habits yet</p>
-          <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+          <p className="text-xs text-gray-500 mt-1 leading-relaxed">
             Add your first habit above to<br />start building your streak.
           </p>
         </div>
