@@ -14,10 +14,35 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Habit Tracker',
-  description: 'Track your daily habits and build streaks',
+  title: 'Habit Tracker — Build Better Habits Daily',
+  description: 'Track your daily habits, build streaks, and stay consistent. A simple and beautiful habit tracking app.',
   manifest: '/manifest.json',
-  themeColor: '#111111',
+  icons: {
+    icon: '/icons/icon-192.png',
+    apple: '/icons/icon-192.png',
+  },
+  keywords: ['habit tracker', 'daily habits', 'streak', 'productivity'],
+  authors: [{ name: 'Your Name' }],
+  openGraph: {
+    title: 'Habit Tracker — Build Better Habits Daily',
+    description: 'Track your daily habits and build streaks.',
+    type: 'website',
+    url: 'https://your-deployed-url.com',
+    images: [
+      {
+        url: '/icons/icon-512.png',
+        width: 512,
+        height: 512,
+        alt: 'Habit Tracker',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Habit Tracker',
+    description: 'Track your daily habits and build streaks.',
+    images: ['/icons/icon-512.png'],
+  },
 }
 
 export default function RootLayout({

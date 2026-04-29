@@ -8,6 +8,11 @@ import { getHabits, saveHabits } from "@/src/lib/storage";
 import { toggleHabitCompletion } from "@/src/lib/habits";
 import HabitList from "../../components/habits/HabitList";
 import HabitForm from "../../components/habits/HabitForm";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard — Habit Tracker',
+}
 
 export default function DashBoard() {
   const router = useRouter();
