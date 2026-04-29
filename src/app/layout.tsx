@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: 'Habit Tracker — Build Better Habits Daily',
     description: 'Track your daily habits and build streaks.',
     type: 'website',
-    url: 'https://your-deployed-url.com',
+    url: 'https://pwa-habit-tracker.netlify.app/',
     images: [
       {
         url: '/icons/icon-512.png',
