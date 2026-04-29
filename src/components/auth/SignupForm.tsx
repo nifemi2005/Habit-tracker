@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { signUp } from "../../lib/auth";
 
@@ -10,6 +10,10 @@ export default function SignupForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setError(null);
+  }, [email, password]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -28,7 +32,7 @@ export default function SignupForm() {
   }
 
   return (
-    <form onClick={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <label
           htmlFor="signup-email"
