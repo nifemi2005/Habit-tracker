@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     apple: '/icons/icon-192.png',
   },
   keywords: ['habit tracker', 'daily habits', 'streak', 'productivity'],
-  authors: [{ name: 'Your Name' }],
+  authors: [{ name: 'Temenu Oluwanifemi' }],
   openGraph: {
     title: 'Habit Tracker — Build Better Habits Daily',
     description: 'Track your daily habits and build streaks.',
