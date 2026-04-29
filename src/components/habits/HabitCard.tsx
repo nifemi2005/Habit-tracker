@@ -85,13 +85,13 @@ export default function HabitCard({ habit, onToggle, onEdit, onDelete }: HabitCa
           className="flex items-center gap-1.5"
         >
           <div className="w-2 h-2 rounded-full bg-[#EF9F27] shrink-0" />
-          <span className="text-xs text-gray-400">
+          <span className="text-xs text-gray-600">
             <span className="font-medium text-[#BA7517]">{streak}</span> day streak
           </span>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-[10px] text-gray-400 bg-[#F7F5F0] border border-[#e8e5e0] rounded-full px-2 py-0.5">
+          <span className="font-medium text-[10px] text-gray-600 bg-[#F7F5F0] border border-[#e8e5e0] rounded-full px-2 py-0.5">
             {habit.frequency}
           </span>
 
@@ -100,7 +100,7 @@ export default function HabitCard({ habit, onToggle, onEdit, onDelete }: HabitCa
             data-testid={`habit-edit-${slug}`}
             onClick={() => onEdit(habit)}
             aria-label="Edit habit"
-            className="text-xs text-gray-400 hover:text-gray-700 transition-colors px-1"
+            className="text-xs text-gray-600 hover:text-gray-700 transition-colors px-1"
           >
             Edit
           </button>
@@ -117,7 +117,7 @@ export default function HabitCard({ habit, onToggle, onEdit, onDelete }: HabitCa
               </button>
               <button
                 onClick={() => setShowConfirm(false)}
-                className="text-xs text-gray-400 hover:text-gray-600 transition-colors px-1"
+                className="text-xs text-gray-600 hover:text-gray-600 transition-colors px-1"
               >
                 Cancel
               </button>
@@ -127,7 +127,7 @@ export default function HabitCard({ habit, onToggle, onEdit, onDelete }: HabitCa
               data-testid={`habit-delete-${slug}`}
               onClick={handleDelete}
               aria-label="Delete habit"
-              className="text-xs text-gray-400 hover:text-red-500 transition-colors px-1"
+              className="text-xs text-gray-600 hover:text-red-500 transition-colors px-1"
             >
               Delete
             </button>

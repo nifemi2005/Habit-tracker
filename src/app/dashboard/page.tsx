@@ -100,7 +100,7 @@ export default function DashBoard() {
             <button
               data-testid="auth-logout-button"
               onClick={handleLogout}
-              className="text-xs text-gray-400 bg-gray-50 border border-gray-200 rounded-full px-3 py-1.5 hover:bg-gray-100 transition-colors"
+              className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-full px-3 py-1.5 hover:bg-gray-100 transition-colors"
             >
               Log out
             </button>
