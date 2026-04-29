@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Habit } from '@/src/types/habit'
-import { getHabitSlug } from '@/src/lib/slug'
-import { calculateStreaks } from '@/src/lib/streaks'
+import { Habit } from '../../types/habit'
+import { getHabitSlug } from '../../lib/slug'
+import { calculateStreaks } from '../../lib/streaks'
 
 type HabitCardProps = {
   habit: Habit

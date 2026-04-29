@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Habit } from '@/src/types/habit'
-import { validateHabitName } from '@/src/lib/validators'
-import { getHabitSlug } from '@/src/lib/slug'
+import { Habit } from '../../types/habit'
+import { validateHabitName } from '../../lib/validators'
+import { getHabitSlug } from '../../lib/slug'
 
 type HabitFormProps = {
   habit: Habit | null
